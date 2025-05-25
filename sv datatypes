@@ -1,0 +1,37 @@
+module tb;
+  bit a;
+  byte k;
+  int c;
+  shortint d;
+  longint e;
+  logic f;
+  integer g;
+  time h;
+  realtime i;
+  initial
+    begin
+      byte b=$bits(a);
+      $display("size of bit=%0d",$bits(a));
+      $display("size of bit=%0d",b);
+      $display("size of bit=%0d",$bits(k));
+      $display("size of bit=%0d",$bits(c));
+      $display("size of bit=%0d",$bits(d));
+      $display("size of bit=%0d",$bits(e));
+      $display("size of bit=%0d",$bits(f));
+      $display("size of bit=%0d",$bits(g));
+      $display("size of bit=%0d",$bits(i));
+      //$display("size of bit=%0d",$bits(a));
+    end
+endmodule
+
+
+output of the code:
+KERNEL: size of bit=1
+# KERNEL: size of bit=1
+# KERNEL: size of bit=8
+# KERNEL: size of bit=32
+# KERNEL: size of bit=16
+# KERNEL: size of bit=64
+# KERNEL: size of bit=1
+# KERNEL: size of bit=32
+# KERNEL: size of bit=64
