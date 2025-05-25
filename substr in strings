@@ -1,0 +1,20 @@
+module tb;
+  string s1="verilog";
+  string s2="System_verilog";
+  string s3="digitalmindscom";
+  string s4;
+  string s5;
+  initial
+    begin
+      $display("s1=%0s",s1.substr(1,5));
+      s4={s1.substr(2,5),"  ",s2.substr(5,8)};
+      $display("s4=%0s",s4);
+      s5={s1.substr(2,5),s2.substr(5,8)};
+      $display("s5=%0s",s5);
+    end
+endmodule
+
+output:
+KERNEL: s1=erilo
+# KERNEL: s4=rilo  m_ve
+# KERNEL: s5=rilom_ve
