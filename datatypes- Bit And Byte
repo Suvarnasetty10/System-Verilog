@@ -1,0 +1,14 @@
+module tb;
+  bit signed[7:0] a;
+  byte unsigned b;
+  initial
+    begin
+      a=-50; //bit is unsigned 
+      b=-50;// byte is signed
+      $display("a=%0d,b=%0d",a,b);
+    end
+endmodule
+
+      
+      
+output: a=-50,b=206
