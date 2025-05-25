@@ -1,0 +1,26 @@
+module tb;
+    enum{blue,red,white,orange,black}clr;
+    initial
+      begin
+        clr=clr.first();
+        $display("clr=%0d,name of the colour=%0s",clr,clr.name);
+        clr=clr.next();
+        $display("clr=%0d,name of the colour=%0s",clr,clr.name);
+        clr=clr.last();
+        $display("clr=%0d,name of the colour=%0s",clr,clr.name);
+        clr=clr.prev();
+        $display("clr=%0d,namee of the colour=%0s",clr,clr.name);
+        clr=clr.prev();
+        $display("clr=%0d,name of the colour=%0s",clr,clr.name);
+      
+      
+    
+      end
+  endmodule
+
+output:
+KERNEL: clr=0,name of the colour=blue
+# KERNEL: clr=1,name of the colour=red
+# KERNEL: clr=4,nmae of the colour=black
+# KERNEL: clr=3,nmae of the colour=orange
+# KERNEL: clr=2,nmae of the colour=white
