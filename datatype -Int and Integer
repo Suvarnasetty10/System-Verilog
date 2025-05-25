@@ -1,0 +1,14 @@
+
+module tb;
+  int a;
+  integer b;
+  initial
+    begin
+      a=16'h10xz;
+      b=16'h10xz;
+      $display("a=%0h,b=%0h",a,b);
+    end
+endmodule
+
+
+output:a=1000,b=10xz
