@@ -1,0 +1,18 @@
+module tb;
+  string s1="suvarna";
+  string s2="SUVARNA";
+  initial
+    begin
+      $display(" %0d",s1.compare(s2));
+      $display("%0d",s1.icompare(s2));
+      
+    end
+endmodule
+
+
+output:
+ KERNEL: 1
+ KERNEL: 0
+
+
+    
