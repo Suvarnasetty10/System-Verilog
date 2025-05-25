@@ -1,0 +1,14 @@
+module tb;
+  int num=5;
+  string ascii;
+  initial
+    begin
+      ascii.itoa(num);
+      $display("integer=%0d",num);
+      $display("integer=%0d",ascii);
+    end 
+endmodule
+
+
+  # KERNEL: integer=5
+# KERNEL: integer=53
