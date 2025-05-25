@@ -1,0 +1,22 @@
+module tb;
+  string val="1234";
+  string s1="1356";
+  string s2="1234.123";
+  real num;
+  initial
+    begin
+      $display("%0.2f",val.atoreal());
+      $display("%0f",s1.atoreal());
+      $display("%0f",s2.atoreal());
+      num = s1.atoreal() + s2.atoreal();
+      $display("num=%0.3f",num);        
+           
+    end
+endmodule
+
+
+out-put:
+# KERNEL: 1234.00
+# KERNEL: 1356.000000
+# KERNEL: 1234.123000
+# KERNEL: num=2590.123
