@@ -1,0 +1,20 @@
+module tb;
+ string s1="VERILOG";
+ string s2="System";
+  string s4;
+  initial
+    begin
+      s1.putc(2,"v");
+      $display("string s1=%0s",s1);
+      s1.putc(4,"o");
+      $display("string s1=%0s",s1);
+      
+       //s4=s2.getc(5);
+      //$display("string s1=%0s",s4);
+      
+    end
+endmodule
+
+
+output:  KERNEL: string s1=VEvILOG
+         KERNEL: string s1=VEvIoOG
