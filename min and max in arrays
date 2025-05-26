@@ -1,0 +1,44 @@
+module tb;
+  int arr[6]='{9,10,5,2,5,11};
+  int arr1[6]='{1,8,7,6,12,15};
+  int arr2[$];
+  int arr3[3]='{1,3,4};initial begin
+    $display("arr=%0p",arr);
+    $display("arr=%0p",arr1);
+    $display(" max of arr=%0p",arr.max());
+    $display("min of arr=%0p",arr.min());
+    $display(" max of arr=%0p",arr1.max());
+    $display("min of arr=%0p",arr1.min());
+    arr.sort();
+    $display("sorting order of arr1=%0p",arr);
+    arr1.sort();
+    $display("sorting order of arr1=%0p",arr1);
+    arr.reverse();
+    $display("sorting order of arr=%0p",arr);
+    arr.rsort();
+    $display("sorting order of arr1=%0p",arr);
+    arr1.rsort();
+    $display("sorting order of arr1=%0p",arr1);
+     arr2 = arr.unique();
+    $display("sorting order of arr1=%0p",arr2);
+    $display("arr3=%0d",arr3.sum());
+    $display("arr3=%0d",arr3.product());  
+  end
+endmodule
+
+output:# KERNEL: arr=9 10 5 2 5 11
+# KERNEL: arr=1 8 7 6 12 15
+# KERNEL:  max of arr=11
+# KERNEL: min of arr=2
+# KERNEL:  max of arr=15
+# KERNEL: min of arr=1
+# KERNEL: sorting order of arr1=2 5 5 9 10 11
+# KERNEL: sorting order of arr1=1 6 7 8 12 15
+# KERNEL: sorting order of arr=11 10 9 5 5 2
+# KERNEL: sorting order of arr1=11 10 9 5 5 2
+# KERNEL: sorting order of arr1=15 12 8 7 6 1
+# KERNEL: sorting order of arr1=2 5 9 10 11
+# KERNEL: arr3=8
+# KERNEL: arr3=12
+
+    
