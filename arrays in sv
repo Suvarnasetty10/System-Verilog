@@ -1,0 +1,30 @@
+module tb;
+  int arr[5];
+  int arr1[]={10,20,30,40,50};
+  bit arr2[]='{10{1}};
+  logic arr3[3:0];
+  reg [3:0]arr5[4]='{default:7};
+  
+  bit[3:0]arr6='{2{1,0}};
+  initial
+    begin
+      $display("arr=%0p",arr);
+      $display("arr=%0p",arr1);
+      $display("arr1=%0d",$size(arr1));
+      $display("arr2=%0p,elements of array2=%0p",$size(arr2),arr2);
+      $display("arr6=%0b",arr6);
+      $display("arr5=%0p",arr5);
+      
+      //$display("arr=%0d",arr1);
+      //$display("arr=%0p",arr);
+    end
+endmodule
+
+
+output:
+# KERNEL: arr=0 0 0 0 0
+# KERNEL: arr=10 20 30 40 50
+# KERNEL: arr1=5
+# KERNEL: arr2=10,elements of array2=1 1 1 1 1 1 1 1 1 1
+# KERNEL: arr6=1010
+# KERNEL: arr5=7 7 7 7
