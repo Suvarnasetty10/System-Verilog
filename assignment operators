@@ -1,0 +1,34 @@
+module tb;
+  int a=15;
+  int b=10;
+  initial 
+    begin
+      a+=b;
+      $display("a=%0d",a);
+     a-=b;
+      $display("a=%0d",a);
+     a*=b;
+      $display("a=%0d",a);
+      a/=b;
+      $display("a=%0d",a);
+      a&=b;
+      $display("a=%0d",a);
+      a|=b;
+      $display("a=%0d",a);
+      a^=b;
+      $display("a=%0d",a);
+    end
+endmodule
+output:
+KERNEL: a=25
+# KERNEL: a=15
+# KERNEL: a=150
+# KERNEL: a=15
+# KERNEL: a=10
+# KERNEL: a=10
+# KERNEL: a=0
+
+  
+  
+  
+  
