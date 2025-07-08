@@ -1,0 +1,127 @@
+//design code for AXI for different input 
+module axi_stream_master(
+  input wire clk,
+  input wire resetn,
+  output reg tvalid,
+  output reg[10:3]tdata,
+  output reg tlast,
+  input wire tready);
+  reg[10:3]count;
+  reg[10:3]data_mem[3:10];
+  initial begin
+    data_mem[3]=8'hA1;
+    data_mem[4]=8'hB2;
+    data_mem[5]=8'hC3;
+    data_mem[6]=8'hD4;
+    data_mem[7]=8'b00101;
+    data_mem[8]=8'h07;
+    data_mem[9]=8'b0111;
+    data_mem[10]=8'h09;
+  end
+  always@(posedge clk or negedge resetn)begin
+    if(!resetn)begin
+      tvalid<=0;
+      tdata<=3;
+      tlast<=0;
+      count<=3;
+    end
+    else begin
+      tvalid<=1;
+      if(tready==1)begin
+        tdata<=data_mem[count];
+        tlast<=(count==8'd10);
+        if(count==8'd10)
+          count<=3;
+        else
+          count<=count+1;
+      end
+    end
+  end
+endmodule
+module axi_stream_slave(
+  input wire clk,
+  input wire resetn,
+  input wire tvalid,
+  input wire[10:3] tdata,
+  input wire tlast,
+  output reg tready);
+  always@(posedge clk or negedge resetn)begin
+    if(!resetn)
+      tready<=1;
+    else
+      tready<=~tready;
+  end
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg clk;
+  reg resetn;
+  wire tvalid;
+  wire[10:3]tdata;
+  wire tlast;
+  wire tready;
+  axi_stream_master u1(.clk(clk),.resetn(resetn),.tvalid(tvalid),.tdata(tdata),.tlast(tlast),.tready(tready));
+axi_stream_slave u2(.clk(clk),.resetn(resetn),.tvalid(tvalid),.tdata(tdata),.tlast(tlast),.tready(tready));
+  initial clk=0;
+  always #5 clk=~clk;
+  initial begin
+    resetn=0;
+    #20;
+    resetn=1;
+  end
+  always@(posedge clk)begin
+    if(tvalid && tready)begin   
+      $display("time %0t:Received data=%0d,tlast=%0b",$time,tdata,tlast);
+    end
+  end
+  initial
+    begin
+      #300;
+      $finish;
+    end
+endmodule
+//output:
+# KERNEL: time 45:Received data=161,tlast=0
+# KERNEL: time 65:Received data=178,tlast=0
+# KERNEL: time 85:Received data=195,tlast=0
+# KERNEL: time 105:Received data=212,tlast=0
+# KERNEL: time 125:Received data=5,tlast=0
+# KERNEL: time 145:Received data=7,tlast=0
+# KERNEL: time 165:Received data=7,tlast=0
+# KERNEL: time 185:Received data=9,tlast=1
+# KERNEL: time 205:Received data=161,tlast=0
+# KERNEL: time 225:Received data=178,tlast=0
+# KERNEL: time 245:Received data=195,tlast=0
+# KERNEL: time 265:Received data=212,tlast=0
+# KERNEL: time 285:Received data=5,tlast=0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
