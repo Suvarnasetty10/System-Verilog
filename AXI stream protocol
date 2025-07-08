@@ -1,0 +1,91 @@
+// Code your design here
+module axi_stream_master(
+  input wire clk,
+  input wire resetn,
+  output reg tvalid,
+  output reg[9:0]tdata,
+  output reg tlast,
+  input wire tready);
+  reg[9:0]count;
+  parameter start_count=10'd801;
+  parameter end_count=10'd808;
+  
+  always@(posedge clk or negedge resetn)begin
+    if(!resetn)begin
+      tvalid<=0;
+      tdata<=0;
+      tlast<=0;
+      count<=start_count;
+    end
+    else begin
+      tvalid<=1;
+      if(tready==1)begin
+        tdata<=count;
+        tlast<=(count==end_count);
+        if(count==end_count)
+          count<=start_count;
+        else
+          count<=count+1;
+      end
+    end
+  end
+endmodule
+module axi_stream_slave(
+  input wire clk,
+  input wire resetn,
+  input wire tvalid,
+  input wire[9:0] tdata,
+  input wire tlast,
+  output reg tready);
+  always@(posedge clk or negedge resetn)begin
+    if(!resetn)
+      tready<=1;
+    else
+      tready<=~tready;
+  end
+endmodule
+//testbench:
+module tb;
+  reg clk;
+  reg resetn;
+  wire tvalid;
+  wire[9:0]tdata;
+  wire tlast;
+  wire tready;
+  axi_stream_master u1(.clk(clk),.resetn(resetn),.tvalid(tvalid),.tdata(tdata),.tlast(tlast),.tready(tready));
+axi_stream_slave u2(.clk(clk),.resetn(resetn),.tvalid(tvalid),.tdata(tdata),.tlast(tlast),.tready(tready));
+  initial clk=0;
+  always #5 clk=~clk;
+  initial begin
+    resetn=0;
+    #20;
+    resetn=1;
+  end
+  always@(posedge clk)begin
+    if(tvalid && tready)begin
+      $display("time %0t:Received data=%0d,tlast=%0b",$time,tdata,tlast);
+    end
+  end
+  initial
+    begin
+      #300;
+      $finish;
+    end
+endmodule
+//output:
+# KERNEL: time 45:Received data=801,tlast=0
+# KERNEL: time 65:Received data=802,tlast=0
+# KERNEL: time 85:Received data=803,tlast=0
+# KERNEL: time 105:Received data=804,tlast=0
+# KERNEL: time 125:Received data=805,tlast=0
+# KERNEL: time 145:Received data=806,tlast=0
+# KERNEL: time 165:Received data=807,tlast=0
+# KERNEL: time 185:Received data=808,tlast=1
+# KERNEL: time 205:Received data=801,tlast=0
+# KERNEL: time 225:Received data=802,tlast=0
+# KERNEL: time 245:Received data=803,tlast=0
+# KERNEL: time 265:Received data=804,tlast=0
+# KERNEL: time 285:Received data=805,tlast=0
+
+
+
