@@ -1,0 +1,53 @@
+class generator; 
+  mailbox mbx;
+  bit[3:0] s;
+  task run();
+    for(int i=0;i<8;i++) begin
+     //y=$random;
+     s=$random;
+      mbx.put(s[3:0]);
+    //for(int i=0;i<8;i++) begin
+      $display("s=%4b",s);
+    end
+  endtask
+endclass
+
+class driver;
+  mailbox mbx;
+  virtual inter vif;
+  bit[3:0]temp;
+  bit[3:0] s;
+  bit[1:0] y;
+  task run();
+    forever begin
+      mbx.get(temp);
+      //y=temp[1];
+      s=temp;
+      //vif.y=y;
+      vif.s=s;
+      vif.y=y;
+      #2;
+      $display("s=%4b,y=%2b",vif.s,vif.y);
+    end
+  endtask
+endclass
+
+module tb;
+  inter aif();
+  encoder dut(.s(aif.s),.y(aif.y));
+  mailbox mbx;
+  generator gen;
+  driver div;
+  initial begin
+    mbx=new();
+    gen=new();
+    div=new();
+    gen.mbx=mbx;
+    div.mbx=mbx;
+    div.vif=aif;
+    fork 
+      gen.run();
+      div.run();
+    join
+  end
+endmodule
