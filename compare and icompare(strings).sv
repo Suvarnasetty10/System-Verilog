@@ -1,0 +1,14 @@
+module tb;
+  string s1="suvarna";
+  string s2="SUVARNA";
+  string s3="SUVARNA";
+  real num;
+  initial
+    begin
+      $display("%0d", s1.compare(s3));
+      $display("%0d", s1.icompare(s2));  
+    end
+endmodule
+//output:
+#KERNEL: 1
+# KERNEL: 0
