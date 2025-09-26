@@ -1,0 +1,39 @@
+class remote;
+    virtual function void presspower();
+    $display("Default : No device selected");
+  endfunction
+endclass
+
+class fan extends remote;
+  function void presspower();
+    $display("fan on / off");
+  endfunction
+endclass
+
+class ac extends remote;
+  function void presspower();
+    $display("ac on / off");
+  endfunction
+endclass
+
+class light extends remote;
+  function void presspower();
+    $display("light on / off");
+  endfunction
+endclass
+
+module tb;
+  remote device[3];
+  initial begin
+    //Polymorphism
+    //base class handle = child class
+    device[0]=fan::new();
+    device[1]=ac::new();
+    device[2]=light::new();
+    foreach(device[i]) device[i].presspower;
+      end
+endmodule
+//output:
+ KERNEL: fan on / off
+# KERNEL: ac on / off
+# KERNEL: light on / off
